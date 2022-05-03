@@ -42,5 +42,7 @@ class StockBoardEmItem(scrapy.Item):
     volume = scrapy.Field()
     # 成交额
     turnover = scrapy.Field()
+    # 时间
+    ISOdate = scrapy.Field()
     pass
 # http://quote.eastmoney.com/center/boardlist.html#boards-BK06551

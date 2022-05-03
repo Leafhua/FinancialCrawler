@@ -3,6 +3,8 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import random
+
 from scrapy import signals
 
 
@@ -78,6 +80,10 @@ class MyCrawlerDownloaderMiddleware:
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+
+        # 随机添加请求头  choice意思是从列表中随机选取一个元素
+        headers = random.choice(spider.settings['USER_AGENT_LIST'])
+        request.headers['User-Agent'] = headers
         return None
 
     def process_response(self, request, response, spider):
@@ -101,3 +107,6 @@ class MyCrawlerDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+

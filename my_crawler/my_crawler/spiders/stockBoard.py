@@ -1,4 +1,5 @@
 # coding = utf-8
+import datetime
 import json
 
 import pandas as pd
@@ -62,6 +63,7 @@ class StockBoardEmSpider(scrapy.Spider):
         #     ]
         # ]
         # temp_df.to_csv('../data/' + datetime.now().date().isoformat() + '_stockBoard.csv', encoding='utf_8_sig')
+
         for index, row in temp_df.iterrows():
             item = StockBoardEmItem()
             item['latestPrice'] = row[0]
@@ -80,6 +82,7 @@ class StockBoardEmSpider(scrapy.Spider):
             item['openToday'] = row[13]
             item['receivedYesterday'] = row[14]
             item['priceToBookRatio'] = row[15]
+            item['ISOdate'] = datetime.datetime.now().replace(microsecond=0).isoformat()
             # print(item)
             # print(row)
             # break

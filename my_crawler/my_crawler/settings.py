@@ -6,14 +6,21 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+import random
 
 BOT_NAME = 'my_crawler'
 
 SPIDER_MODULES = ['my_crawler.spiders']
 NEWSPIDER_MODULE = 'my_crawler.spiders'
 
+
+# DataBase Setting
+
+MONGODB_HOST = "127.0.0.1"
+MONGODB_PORT = 27017
+MONGODB_DBNAME = "FinancialCrawler"
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'Mozilla/5.0'
 USER_AGENT_LIST = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36",
     "Opera/8.61.(Windows NT 5.1; de-LU) Presto/2.9.180 Version/11.00",
@@ -27,6 +34,8 @@ USER_AGENT_LIST = [
     "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.01; Trident/5.0)",
     "Mozilla/5.0 (compatible; MSIE 8.0; Windows 98; Win 9x 4.90; Trident/4.1)"
 ]
+USER_AGENT = random.choice(USER_AGENT_LIST)
+
 # LOG_LEVEL = 'ERROR'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -62,9 +71,9 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    'my_crawler.middlewares.MyCrawlerDownloaderMiddleware': 543,
-# }
+DOWNLOADER_MIDDLEWARES = {
+   'my_crawler.middlewares.MyCrawlerDownloaderMiddleware': 543,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
