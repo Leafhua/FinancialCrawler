@@ -10,6 +10,7 @@ import pandas as pd
 from pyecharts import options as opts
 from pyecharts.charts import Kline, Line, Bar, Grid
 
+# sd.clean_data()
 df = pd.read_csv('..\\resources\\stockBoardEm.csv')
 df["ISO时间"] = pd.to_datetime(df["ISO时间"]).dt.date
 
@@ -79,6 +80,7 @@ def draw_charts():
             itemstyle_opts=opts.ItemStyleOpts(color="#ec0000", color0="#00da3c"),
         )
         .set_global_opts(
+            title_opts=opts.TitleOpts(title=chart_data["name"] + ' K线周期图表'),
             legend_opts=opts.LegendOpts(
                 is_show=False, pos_bottom=10, pos_left="center"
             ),
@@ -240,5 +242,3 @@ def draw_charts():
 if __name__ == "__main__":
     chart_data = get_data(300199)
     draw_charts()
-
-
