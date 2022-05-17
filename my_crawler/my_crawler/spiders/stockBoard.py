@@ -24,45 +24,6 @@ class StockBoardEmSpider(scrapy.Spider):
     def parse(self, response):
         data_json = json.loads(response.text)
         temp_df = pd.DataFrame(data_json['data']['diff'])
-        # temp_df.columns = [
-        #     "最新价",
-        #     "涨跌幅",
-        #     "涨跌额",
-        #     "成交量",
-        #     "成交额",
-        #     "振幅",
-        #     "换手率",
-        #     "市盈率-动态",
-        #     "量比",
-        #     "股票代码",
-        #     "股票名称",
-        #     "最高",
-        #     "最低",
-        #     "今开",
-        #     "昨收",
-        #     "市净率",
-        # ]
-        # temp_df = temp_df[
-        #     [
-        #         "股票名称",
-        #         "股票代码",
-        #         "今开",
-        #         "昨收",
-        #         "最新价",
-        #         "最高",
-        #         "最低",
-        #         "涨跌幅",
-        #         "涨跌额",
-        #         "振幅",
-        #         "市盈率-动态",
-        #         "量比",
-        #         "换手率",
-        #         "市净率",
-        #         "成交量",
-        #         "成交额",
-        #     ]
-        # ]
-        # temp_df.to_csv('../data/' + datetime.now().date().isoformat() + '_stockBoard.csv', encoding='utf_8_sig')
 
         for index, row in temp_df.iterrows():
             item = StockBoardEmItem()

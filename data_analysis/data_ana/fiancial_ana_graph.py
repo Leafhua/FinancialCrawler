@@ -51,12 +51,13 @@ def stock_volume_vertical_bar(df):
     )
 
 
-def stock_open_close_line(df):
+def stock_open_close_line(name):
     """
     绘制今开昨收折线图
-    :param df: 只带一个数据的DataFrame
+    :param name: 只带一个数据的DataFrame
     :return:
     """
+    df = financial_ana_data.stock_data_by_name(name)
     if df is None:
         df = pd.DataFrame
     df = df.dropna(subset=["今开"])
@@ -78,7 +79,7 @@ def stock_open_close_line(df):
                        )
             .set_global_opts(
             title_opts=opts.TitleOpts(
-                title="今开昨收数据图", pos_left="center"
+                title=name + " 今开昨收数据图", pos_left="center"
             ),
             tooltip_opts=opts.TooltipOpts(trigger="axis"),
             axispointer_opts=opts.AxisPointerOpts(
@@ -210,8 +211,8 @@ def stock_close_worldcloud(time):
     )
 
 
-stock_close_worldcloud("2022-5-6")
-# stock_close_volume_scatter("上海临港")
+stock_close_worldcloud("2022-5-13")
+stock_close_volume_scatter("上海临港")
 # stock_volume_slider(today_df)
-# stock_volume_vertical(financial_ana_data.stock_data_by_time('2022-5-5'))
-# stock_open_close_line(financial_ana_data.stock_data_by_name("上海临港"))
+stock_volume_vertical_bar(financial_ana_data.stock_data_by_time('2022-5-13'))
+stock_open_close_line("上海临港")
